@@ -1,0 +1,6 @@
+Assignment #1
+
+(A) Recompile the Linux kernel without any modification
+(B) Implement a new system call which takes 2 parameters x and y from user and returns
+a*(x^2) + b*(y^2) + c*x – y
+where a, b and c are constants.
