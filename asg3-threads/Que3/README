@@ -1,0 +1,42 @@
+1. Name	:	Neethu Bal Mallya 
+2. List of files included:
+	(1) Que3.h 	 - Header file of Question 3
+	(2) Que3.c 	 - Implementation file of Question 3 
+	(3) main.c	 - Driver file for Question 3
+	(4) input<i>.txt - Sample Inputs for Question 3 (i=1,2,3)
+	(5) Makefile	 - Makefile for compiling Que3.c and main.c
+3. Program Compilation
+	    make         - Compiles the .c files and generates the executable Que3    
+4. Program Execution
+	   ./Que3 < input<i>.txt			
+		input<i>.txt : Contains 2 numbers for Multiplication
+5. Program Description
+	Program performs the multiplication of 2-N digit numbers
+		i.  If numbers read are not of equal length, display error message and exits from the program.
+		ii. For numbers of equal length, (2N-1) threads are created for computing each digit in the result.
+		iii.Main Program performs carry forwarding for the pdt[] and generates the final result. 
+6. Program Output
+	(1) ./Que3 < input1.txt
+			       1   2   3  X
+			       4   3   1
+		-----------------------------------------------------------------------------------
+			       1   2   3
+			   3   6   9
+		       4   8  12
+		-----------------------------------------------------------------------------------
+		       4  11  19  11   3
+		-----------------------------------------------------------------------------------
+		   0   5   3   0   1   3
+	(2) ./Que3 < input2.txt
+		Enter numbers of equal length
+	(3) ./Que3 < input3.txt
+			       9   9   9  X
+			       9   9   9
+		-----------------------------------------------------------------------------------
+			      81  81  81
+			  81  81  81
+		      81  81  81
+		-----------------------------------------------------------------------------------
+		      81 162 243 162  81
+		-----------------------------------------------------------------------------------
+		   9   9   8   0   0   1

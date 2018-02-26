@@ -1,0 +1,4 @@
+setpath /bin/date
+date
+setpath /usr/bin/which
+which ls

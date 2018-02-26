@@ -1,0 +1,3 @@
+echo sampledata2 cmd1
+echo sampledata2 cmd2
+echo sampledata2 cmd3

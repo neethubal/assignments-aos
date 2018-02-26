@@ -1,0 +1,58 @@
+1. Name	:	Neethu Bal Mallya 
+2. List of files included:
+	(1) Que1.h 	 - Header file of Question 1
+	(2) Que1.c 	 - Implementation file of Question 1 
+	(3) main.c	 - Driver file for Question 1
+	(4) input<i>.txt - Sample Inputs for Question 1 (i=1,2,3)
+	(5) Makefile	 - Makefile for compiling Que1.c and main.c
+3. Program Compilation
+	    make         - Compiles the .c files and generates the executable Que1    
+4. Program Execution
+	    ./Que1 < input<i>.txt			
+		input<i>.txt : Contains the input sequence and matrix as specified in question
+5. Program Description
+	Determines the possible valid paths for a given sequence in the given matrix as specified in the question.	
+	If an element of sequence and corresponding element in matrix matches, the program creates 3 threads for 
+	the specific element in matrix corresponding to right, below and diagonal directions. 
+	For valid paths, a 2D integer array is maintained to store the paths in forward order. 
+	For example: valid path: (2,2)->(1,1)->(0,1)->(0,0) would be stored as path[][]={00,01,11,22}=>{0,1,11,22}
+		which is read as (path[i][j]/10,path[i][j]%10) for the position in matrix
+	A global count for each node in valid path is maintained to manage the storing in path[][] array.
+6. Program Output
+	(1) ./Que1 < input1.txt
+		M		:	7
+		Sequence Array  :	1 2 4 6 8 6 3 
+		N		:	4
+		Matrix 		:	1 2 5 9 
+					2 4 6 8 
+					7 4 9 6 
+					3 1 1 3 
+			
+		Number of Paths :	2
+		Paths		:	(3,3)->(2,3)->(1,3)->(1,2)->(1,1)->(0,1)->(0,0)
+					(3,3)->(2,3)->(1,3)->(1,2)->(1,1)->(1,0)->(0,0)
+	(2) ./Que1 < input2.txt	
+		M		:	7
+		Sequence Array  :	1 2 3 4 5 6 7 
+		N		:	4
+		Matrix 		:	1 2 5 9 
+					2 4 6 8 
+					7 4 9 6 
+					3 1 1 3 
+			
+		NO PATH
+	(3) ./Que1 < input3.txt
+		M		:	5
+		Sequence Array  :	1 1 1 1 1 
+		N		:	3
+		Matrix 		:	1 1 1 
+					1 1 1 
+					1 1 1 
+			
+		Number of Paths :	6
+		Paths		:	(2,2)->(1,2)->(1,1)->(0,1)->(0,0)
+					(2,2)->(1,2)->(0,2)->(1,0)->(0,0)
+					(2,2)->(2,1)->(1,1)->(1,0)->(0,0)
+					(2,2)->(2,1)->(2,0)->(1,0)->(0,0)
+					(2,2)->(1,2)->(1,1)->(0,1)->(0,0)
+					(2,2)->(2,1)->(1,1)->(0,1)->(0,0)

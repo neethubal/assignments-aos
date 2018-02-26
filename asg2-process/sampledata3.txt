@@ -1,0 +1,4 @@
+setpath /bin/uname
+uname -r -s -p
+setpath /usr/bin/man
+man

@@ -1,0 +1,49 @@
+--------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------
+						Recompilation of Linux Kernel
+--------------------------------------------------------------------------------------------------------------------------------------
+/* Download the latest stable kernel
+   Copy the downloaded kernel source to /usr/src/ */
+Commands followed for Compiling New Kernel:-
+	cd /usr/src
+	tar -xvf linux-3.16.0.tar.gz
+	cd linux-3.16.0
+	make menuconfig			/* kernel configuration */
+	make				/* kernel compilation */
+	make modules			/* kernel modules compilation */
+	make modules_install		/* kernel modules installation */
+	make install			/* kernel installation - copies four files to /boot */
+	ls /boot
+					/* New files in /boot :
+						System.map-3.16.0
+						initrd.img-3.16.0
+						vmlinuz-3.16.0 
+						config-3.16.0 	*/ 
+	update-grub			/* modify grub configuration file (/boot/grub/grub.cfg) */
+	reboot				/* reboots machine to boot into new kernel */
+--------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------
+					       Implementation of New System Call
+--------------------------------------------------------------------------------------------------------------------------------------
+Kernel files to be modified:
+	(1) /usr/src/linux-3.16.0/arch/x86/syscalls/syscall_32.tbl	/* Add new system call to the existing list of system calls
+									 @the end: 354	i386	newsyscall  sys_newsyscall */	
+	(2) /usr/src/linux-3.16.0/include/linux/syscalls.h		/* Add the new system call declaration to header file
+									 @the end: asmlinkage long sys_newsyscall(int, int); */
+	(3) /usr/src/linux-3.16.0/kernel/Makefile			/* Edit Makefile of Kernel directory 
+									   add newsyscall.o to obj-y list */
+New Kernel files to be created:
+	(1) /usr/src/linux-3.16.0/kernel/newsyscall.c			/* Source code of new system call */
+
+Edit Makefile of kernel before recompiling: /usr/src/linux-3.16.0/kernel/Makefile
+	@extraversion line: EXTRAVERSION = .syscall
+
+Recompile the kernel with the above modifications
+ 
+New User Space Files to be created:
+	(1) /usr/include/newsyscall.h					/* Header file for new system call */
+	(2) newsyscall.c 						/* Test code for new system call */
+		Compilation:	gcc -o new newsyscall.c
+		Execution:	./new
+--------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------

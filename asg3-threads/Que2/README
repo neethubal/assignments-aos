@@ -1,0 +1,61 @@
+1. Name	:	Neethu Bal Mallya 
+2. List of files included:
+	(1) Que2.h 	 - Header file of Question 2
+	(2) Que2.c 	 - Implementation file of Question 2
+	(3) main.c	 - Driver file for Question 2 
+	(4) input<i>.txt - Sample Inputs for Question 2 (i=1,2,3)
+	(5) Makefile	 - Makefile for compiling Que2.c and main.c
+3. Program Compilation
+	    make         - Compiles the .c files and generates the executable Que2    
+4. Program Execution
+	    ./Que2 < input<i>.txt			
+		input<i>.txt : Contains N complex numbers for Multiplication
+5. Program Description
+	Performs the multiplication of complex numbers as specified in the question.
+		i.   Program creates (N/2) threads for finding D[2i]*D[2i+1] where i=0,1,..(N/2)-1.
+		ii.  Temporary Output is printed and temp[i] is copied to D[i] (i=0,1,..(N/2)-1) for next level processing.
+		iii. For odd number of inputs, the last input is copied as D[N/2] for next level processing.
+		iv.  Updates the value of N to N/2 and repeats steps (i) to (iv) until N=1.
+6. Program Output
+	(1) ./Que2 < input1.txt
+		N=8 
+		CN0 -2+i9
+		CN1 4+i10
+		CN2 -1+i-3
+		CN3 2+i1
+		CN4 -5+i9
+		CN5 3+i6
+		CN6 -1+i10
+		CN7 2+i3
+
+		C00 -98+i16
+		C01 1+i-7
+		C02 -69+i-3
+		C03 -32+i17
+
+		C10 14+i702
+		C11 2259+i-1077
+
+		C20 787680+i1570740
+	(2) ./Que2 < input2.txt
+		N=7
+		CN0 1+i2
+		CN1 1+i-1
+		CN2 -1+i4
+		CN3 1+i3
+		CN4 3+i0
+		CN5 2+i-2
+		CN6 3+i-5
+
+		C00 3+i1
+		C01 -13+i1
+		C02 6+i-6
+		CN6 3+i-5
+
+		C10 -40+i-10
+		C11 -12+i-48
+
+		C20 0+i2040
+	(3) ./Que2 < input3.txt
+		N=1
+		CN0 3+i5	

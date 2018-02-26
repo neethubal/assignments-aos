@@ -1,0 +1,5 @@
+setpath /bin/ls
+ls -l
+setpath /bin/echo
+echo test1
+echo test2

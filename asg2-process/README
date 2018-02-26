@@ -1,0 +1,66 @@
+1. Name	:	Neethu Bal Mallya 
+2. List of files included:
+	(1) Que1.c 	- Source file of Question 1
+	(2) Que2.c 	- Source file of Question 1
+	(3) Text files with linux commands - Sample Inputs for Que2 
+		sampledata1.txt	
+		sampledata2.txt
+		sampledata3.txt
+		sampledata4.txt
+	(4) Makefile	- Makefile for compiling Que1.c and Que2.c
+3. Program Compilation
+	    make all    - Compiles both the .c files and generates the executables Que1 and Que2
+	    OR
+	    make Que1 	- Compiles Que1.c and generate the executable Que1
+	    make Que2   - Compiles Que2.c and generate the executable Que2	    
+4. Program Execution
+	(1) ./Que1 <children> <levels>		
+		children : Number of children Main process has to create	
+		levels	 : Number of levels in the Process Tree
+			Ex: ./Que 2 3
+	(2) ./Que2 sampledata1.txt sampledata2.txt .... sampledataN.txt				
+		sampledata<i>.txt : Contains UNIX commands in each line; 
+				    Program sets the command path as specified with "setpath" in the input file for the commands 					    following the line with "setpath" (Ex: sampledata1.txt) or the default path (DEF_PATH macro) 
+				    if path is not specified in the input file (Ex: sampledata2.txt)
+			Ex: ./Que2 sampledata1.txt sampledata2.txt sampledata3.txt sampledata4.txt 		
+5. Program Description
+	(1) Que1.c
+		(a) Main program accepts the number of children it has to create and 
+	            the number of levels that the process tree must contain. 	
+		(b) Parent process(all parents in the same level) creates a child and furthur execution of the child is stopped 
+		    until the parent completes creating all its children. 
+		    (For Main process, the count is the command-line argument; For others, it is maintained in the variable n)
+		(c) Parent process also keeps track of the PID's of the children it created. 
+		    (Maintained in the array child[] and tracked using the variable j)
+		    Once it finishes all the forking, it sends continue signal to each of the children. 
+		(d) The child processes resumes its execution and repeats steps (b), (c) and (d)
+		(e) Once all the child processes has exited (exit status is same as "n" ie the number of its children),
+		    Main process reads the output.txt file created (includes information of child like PID, PPID, level, n, i, j, k).
+		    Since the file can have duplicate entries, system command for sort is used to remove the duplicate entries and 			    sort according to the tree structure (ie increasing order of PID and decreasing order of n; because the processes 			    in same level would have created children at the same time and hence PIDs may not be in increasing order for a 			    given process)
+		(f) Main creates Process Tree structure using the insert() function
+		(g) Main calls the inorderTraversal() function to print the in-order traversal of the given tree
+			Assumption: If there is only 1 child, it would be considered as right child.
+				    (To get the correct traversal for the process tree in the question)
+	(2) Que2.c
+		(a) Main process creates as many child processes as the number of file names passed as parameters.
+		(b) All the child processes find the UNIX command to be executed and are stopped from further execution.
+		    (i)   A file entry can be a "setpath" which specifies command path for the following commands 
+			  or a UNIX command with zero or more options.
+		    (ii)  If fgets() takes a setpath entry, it reads next line for the UNIX command, parses it as token 
+			  of strings separated by spaces (using parsecmd() function). 
+		    (iii) If a "setpath" is not found before the first UNIX command, it sets PATH as DEF_PATH 
+			  (macro saved as "/bin/echo" in source file)
+		(c) Main resumes odd files in order and for each command in the file the child fork a new process, which
+		    uses execv() to execute the command.
+		(d) Step (c) is repeated until all the commands of the odd files are executed.
+		    (Loop executes for a count of MAX_INSTR ie the maximum of count of instructions in odd files and even files)
+		(e) After all the odd files finish with their executions, step (c) and (d) are repeated for even files.
+6. Program Completion/Further Modification
+	(1) Que1.c
+		(i)  The insert() function will not properly insert if levels are greater than 4; This is because I did 
+		     not consider the insertions to children other than first one in each level. However, for level=3, 
+	             the different cases have been included.
+		     I tried generalising the same logic for levels>4, but ended up in wrong results.
+			(It works for ./Que1 2 4 but not for ./Que1 3 4)	
+		(ii) I've used system command to sort the output file for maintaining the process tree data structure.
+		     If I had more time, I would have written a C function to perform the same.
